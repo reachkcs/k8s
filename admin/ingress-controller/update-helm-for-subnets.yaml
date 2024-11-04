@@ -1,0 +1,13 @@
+clusterName: dev-eks-cluster
+serviceAccount:
+  create: false
+  name: aws-load-balancer-controller
+vpc:
+  subnets:
+    private:
+      - subnet-09d95aa73fbfb1a77
+      - subnet-0388bee1ac21cadac
+    public:
+      - subnet-0d5889364b1942460
+region: us-east-1
+
