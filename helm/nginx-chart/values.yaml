@@ -1,0 +1,20 @@
+replicaCount: 1
+
+image:
+  repository: nginx 
+  tag: "1.21.6"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  annotations: {}
+  hosts:
+    - host: nginx.local
+      paths:
+        - /
+  tls: []
+  
