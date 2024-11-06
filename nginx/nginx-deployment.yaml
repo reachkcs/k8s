@@ -21,6 +21,12 @@ spec:
           image: nginx:latest
           ports:
             - containerPort: 80
+          volumeMounts:
+            - name: nginx-logs
+              mountPath: /var/log/nginx
+      volumes: 
+        - name: nginx-logs
+          emptyDir: {}
 ---
 apiVersion: v1
 kind: Service

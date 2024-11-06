@@ -2,9 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: fluent-bit-config
-  namespace: kube-logging
-  labels:
-    k8s-app: fluent-bit
+  namespace: fluent-bit
 data:
   fluent-bit.conf: |
     [SERVICE]
@@ -15,25 +13,18 @@ data:
 
     [INPUT]
         Name          tail
-        Path          /var/log/containers/*.log
-        Parser        docker
-        Tag           kube.*
+        Path          /var/log/nginx/access.log
+        Tag           nginx.access
+        DB            /var/log/flb_nginx.db
         Refresh_Interval 5
-
-    [FILTER]
-        Name          kubernetes
-        Match         kube.*
-        Kube_URL      https://kubernetes.default.svc:443
-        Merge_Log     On
-        Kube_Meta_Preload On
-        Kube_Tag_Prefix kube.var.log.containers.
+        Read_from_Head  true
 
     [OUTPUT]
         Name          stdout
         Match         *
   parsers.conf: |
     [PARSER]
-        Name         docker
+        Name         nginx_parser
         Format       json
         Time_Key     time
         Time_Format  %Y-%m-%dT%H:%M:%S.%L
