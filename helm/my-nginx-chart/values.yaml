@@ -6,7 +6,17 @@ image:
   pullPolicy: IfNotPresent
 
 service:
-  type: LoadBalancer
+  type: ClusterIP
   port: 80
 
-resources: {}
+ingress:
+  enabled: true
+  className: ""
+  annotations: {}
+  hosts:
+    - host: nginx.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+
