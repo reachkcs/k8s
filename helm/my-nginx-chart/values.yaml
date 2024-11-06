@@ -9,12 +9,4 @@ service:
   type: LoadBalancer
   port: 80
 
-ingress:
-  enabled: false
-  annotations: {}
-  hosts:
-    - host: nginx.local
-      paths:
-        - /
-  tls: []
-  
+resources: {}
